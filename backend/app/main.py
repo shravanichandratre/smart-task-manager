@@ -6,7 +6,6 @@ from app.database import get_db
 from pydantic import BaseModel
 from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
-from typing import Optional
 
 app = FastAPI()
 
@@ -46,11 +45,13 @@ def read_tasks(db: Session = Depends(get_db)):
 @app.put("/tasks/{task_id}", response_model=TaskCreate)
 def update_task(task_id: int, task: TaskCreate, db: Session = Depends(get_db)):
     db_task = db.query(Task).filter(Task.id == task_id).first()
+    print("task db", db_task)
     if db_task is None:
         raise HTTPException(status_code=404, detail="Task not found")
 
     # Update the completed field
     db_task.completed = task.completed
+    print("task.completed", db_task.completed)
 
     try:
         db.commit()  # Ensure commit is executed

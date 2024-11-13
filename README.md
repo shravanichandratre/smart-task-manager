@@ -4,7 +4,6 @@
 
 ---
 
-
 ## Tech Stack
 
 - **Backend**: FastAPI, Python
@@ -14,7 +13,6 @@
 - **Containerization**: Docker Compose
 
 ---
-
 
 ## Features
 
